@@ -1,0 +1,2 @@
+#!/bin/sh -e
+install -Dm755 kiss-chdefault "$1/usr/bin/kiss-chdefault"

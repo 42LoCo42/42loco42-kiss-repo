@@ -1,0 +1,6 @@
+glib
+pixman
+libjpeg-turbo
+gstreamer
+spice-protocol make
+automake make

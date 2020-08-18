@@ -1,0 +1,3 @@
+#!/bin/sh -e
+echo -e "\e[38;5;1mWARNING:\e[m installing this package removes /usr/local"
+read -p "Press Enter to confirm"

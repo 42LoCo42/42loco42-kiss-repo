@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+./configure -p /usr
+make || true
+make # for some reasons, the first make fails
+make DESTDIR="$1" install

@@ -1,0 +1,10 @@
+glib
+libjpeg-turbo
+pixman
+
+cyrus-sasl
+opus
+lz4
+gstreamer
+
+spice-protocol make

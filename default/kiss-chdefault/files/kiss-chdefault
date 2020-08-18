@@ -1,0 +1,12 @@
+#!/bin/env sh
+# Switch to your default kiss chroot
+
+CHROOT="$HOME/.cache/kiss/kiss-chroot"
+
+[ ! -d "$CHROOT" ] && echo "Chroot $CHROOT not found!" && exit 1
+
+for i in /var/db/*; do
+	[ "$i" != "/var/db/kiss" ] && rm -rf "${CHROOT}$i" && cp -r "$i" "${CHROOT}$i"
+done
+sudo cp "/etc/profile.d/kiss_path.sh" "$CHROOT/etc/profile.d/"
+sudo kiss-chroot "$CHROOT"

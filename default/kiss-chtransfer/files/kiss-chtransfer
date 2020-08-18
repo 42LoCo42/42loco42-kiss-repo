@@ -1,0 +1,31 @@
+#!/bin/env sh
+# Copy a package to your default kiss chroot
+
+CHROOT="$HOME/.cache/kiss/kiss-chroot"
+
+fail() {
+	echo "$1"
+	exit 1
+}
+
+[ ! -d "$CHROOT" ] && fail "Chroot $CHROOT not found!"
+
+[ -z ${1+x} ] && fail "Usage: $0 <package>"
+
+kiss list | grep "$1" >/dev/null || fail "Package $1 not installed!"
+
+[ -e "$CHROOT/var/db/kiss/installed/$1" ] && fail "Skipping $1"
+
+for i in $(kiss depends "$1"); do
+	"$0" "$i"
+done
+
+echo "Installing $1"
+
+for i in $(kiss manifest "$1"); do
+	[ -d "$i" ] && sudo mkdir -p "${CHROOT}$i"
+done
+
+for i in $(kiss manifest "$1"); do
+	[ -f "$i" ] && sudo cp -f "$i" "${CHROOT}$i"
+done

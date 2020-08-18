@@ -1,0 +1,4 @@
+#!/bin/sh -e
+./configure --enable-xspice --prefix="/usr"
+make
+make DESTDIR="$1" install
