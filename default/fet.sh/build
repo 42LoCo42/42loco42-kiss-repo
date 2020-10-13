@@ -1,0 +1,2 @@
+#!/bin/sh -e
+install -Dm755 fet.sh "$1/usr/bin/fet.sh"
