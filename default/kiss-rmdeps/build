@@ -1,0 +1,2 @@
+#!/bin/sh -e
+install -Dm755 kiss-rmdeps "$1/usr/bin/kiss-rmdeps"

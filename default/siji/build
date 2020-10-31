@@ -1,3 +1,2 @@
 #!/bin/sh -e
-echo ./install.sh -d "$1/usr/share/fonts/"
-st
+./install.sh -d "$1/usr/share/fonts/"
