@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+cmake -B build . \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DENABLE_GUI=ON \
+		-DENABLE_X11=OFF \
+		-DENABLE_PYTHON_SCRIPTING=ON \
+		-DENABLE_PYTHON_EXTENSION=ON \
+		-DENABLE_LIBSPIRO=ON \
+		-DENABLE_LIBUNINAMESLIST=ON \
+		-DENABLE_LIBGIF=ON \
+		-DENABLE_LIBJPEG=ON \
+		-DENABLE_LIBPNG=ON \
+		-DENABLE_LIBREADLINE=ON \
+		-DENABLE_LIBTIFF=ON \
+		-DENABLE_WOFF2=ON \
+		-DENABLE_DOCS=OFF \
+        -DENABLE_GETTEXT=OFF
+
+make -C build
+make -C build DESTDIR="$1" install
+
+mkdir -p "$1/usr/lib"
+mkdir -p "$1/usr/share/fontforge/python"
+
+mv "$1/usr/lib/python3"* "$1/usr/lib"
+mv "$1/usr/share/fontforge/python/excepthook.py" "$1/usr/share/fontforge/python"
+

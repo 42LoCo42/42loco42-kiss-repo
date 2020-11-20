@@ -1,0 +1,12 @@
+cmake make
+pango make
+giflib make
+tiff make
+libxml2 make
+libspiro make
+python make
+potrace make
+woff2 make
+gtk+3 make
+libuninameslist make
+readline make

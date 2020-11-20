@@ -1,0 +1,4 @@
+#!/bin/sh -e
+st
+./autogen.sh --sysconfdir=/etc --prefix=/usr --mandir=/usr/share/man
+make DESTDIR="$1" install

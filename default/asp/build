@@ -1,0 +1,5 @@
+#!/bin/sh -e
+st
+patch Makefile no-manpages.patch
+make
+make DESTDIR="$1" install
