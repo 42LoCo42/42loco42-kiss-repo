@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+mkdir -p "$1/usr/java"
+cp -r openjdk-jre-11-bin "$1/usr/java/"

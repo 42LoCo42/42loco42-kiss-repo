@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+cd cli-visualizer-1.8
+patch < "../no-color-diagnostics.patch"
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX='/usr'
+
+cmake --build build
+cmake --install build

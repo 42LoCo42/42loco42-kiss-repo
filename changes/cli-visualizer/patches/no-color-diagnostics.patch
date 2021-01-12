@@ -1,0 +1,11 @@
+--- CMakeLists.txt	2020-12-06 17:05:38.083020223 +0100
++++ CMakeLists.txt	2020-12-06 17:05:52.581837948 +0100
+@@ -56,7 +56,7 @@
+ include(CheckCXXCompilerFlag)
+ check_cxx_compiler_flag(-fcolor-diagnostics CXX_COLOR_SUPPORTED)
+ if(CXX_COLOR_SUPPORTED)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+ endif()
+ 
+ # Compiler specific flags

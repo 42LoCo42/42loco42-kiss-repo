@@ -1,0 +1,10 @@
+#!/bin/sh -e
+patch < "change-options.patch"
+
+mkdir -p "$1/usr/bin"
+mkdir -p "$1/usr/lib/fmui"
+for script in ./*.sh; do
+	install -D -m755 "${script}" "$1/usr/lib/fmui"
+done
+install -D -m755 ./fmui "$1/usr/lib/fmui"
+ln -s "/usr/lib/fmui/fmui" "$1/usr/bin/fmui"

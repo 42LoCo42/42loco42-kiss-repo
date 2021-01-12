@@ -1,0 +1,10 @@
+alsa-lib
+kiss-java
+libX11
+libXau
+libXext
+libXi
+libXrender
+libXtst
+libxcb
+zlib

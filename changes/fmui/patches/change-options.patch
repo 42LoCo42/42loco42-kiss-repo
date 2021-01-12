@@ -1,0 +1,85 @@
+diff --git a/cover.sh b/cover.sh
+index 65aab92..ad14e77 100644
+--- a/cover.sh
++++ b/cover.sh
+@@ -49,7 +49,7 @@ function File::get_mime_type {
+ function Video::extract_random_frame {
+     local max_width="$1" path_video="$2" path_image="$3"
+     local duration="`ffmpeg -i "$path_video" 2>&1 | grep 'Duration: ' | \
+-                        grep --only-matching --perl-regexp '(\d+):(\d+):(\d+)'`"
++                        pcre2grep --only-matching '(\d+):(\d+):(\d+)'`"
+     local hour="${duration:0:2}" minute="${duration:3:2}" second="${duration:6:2}"
+     local seconds=$(( second + minute * 60 + hour * 60 * 60 ))
+     ffmpeg -y -ss $(( ( (RANDOM<<15) | RANDOM ) % seconds + 0 )) \
+diff --git a/fmui b/fmui
+index a3a3f54..d5894f7 100755
+--- a/fmui
++++ b/fmui
+@@ -15,7 +15,7 @@
+ # along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ set -a # export everything
+-readonly PROJECT_ROOT=$(dirname `readlink --canonicalize "${BASH_SOURCE[0]}"`)
++readonly PROJECT_ROOT=$(dirname `readlink -f "${BASH_SOURCE[0]}"`)
+ 
+ source "$PROJECT_ROOT/essentials.sh"
+ source "$PROJECT_ROOT/defaults.sh"
+@@ -75,8 +75,8 @@ function Fmui::initialise_keybindings {
+             cmd="${data:1}"
+ 
+             if [[ "${data:0:1}" == '(' ]]; then
+-                cmd=`grep --only-matching --perl-regexp "$PATTERN_OUTER_BRACKETS" <<<"$data" |
+-                            head --lines 1`
++                cmd=`pcre2grep --only-matching "$PATTERN_OUTER_BRACKETS" <<<"$data" |
++                            head -n 1`
+                 cmd="${cmd:1:-1}"
+             fi
+ 
+diff --git a/mpc.sh b/mpc.sh
+index c8be812..e1f02ef 100644
+--- a/mpc.sh
++++ b/mpc.sh
+@@ -18,21 +18,21 @@ source "$PROJECT_ROOT/defaults.sh"
+ 
+ 
+ function Mpc::get_raw_song_info {
+-    mpc | grep --perl-regexp ']\s*#'
++    mpc | pcre2grep ']\s*#'
+ }
+ 
+ 
+ function Mpc::get_song_progress {
+     Mpc::get_raw_song_info | \
+-        grep --only-matching --perl-regexp '(?<=\()[0-9]+(?=%)'
++        pcre2grep --only-matching '(?<=\()[0-9]+(?=%)'
+ }
+ 
+ 
+ function Mpc::get_song_duration {
+     local duration=`mpc current --format "%time%"`
+     local seconds=$(( 
+-        $(( 10#`grep --only-matching --perl-regexp '([0-9]+)(?=:)' <<< "$duration"` * 60 )) +
+-        10#`grep --only-matching --perl-regexp '(?<=:)([0-9]+)' <<< "$duration"` ))
++        $(( 10#`pcre2grep --only-matching '([0-9]+)(?=:)' <<< "$duration"` * 60 )) +
++        10#`pcre2grep --only-matching '(?<=:)([0-9]+)' <<< "$duration"` ))
+     echo -n "${seconds:-1}"
+ }
+ 
+@@ -43,7 +43,7 @@ function Mpc::get_song_name {
+ 
+ 
+ function Mpc::get_options {
+-    mpc | grep "volume" | sed 's|:\([^ ]\)|: \1|' | head --lines 1
++    mpc | grep "volume" | sed 's|:\([^ ]\)|: \1|' | head -n 1
+ }
+ 
+ 
+@@ -53,7 +53,7 @@ function Mpc::get_playlist {
+ 
+ 
+ function Mpc::get_playlist_filename {
+-    mpc playlist --format '%file%' | head --lines "$1" | tail --lines 1
++    mpc playlist --format '%file%' | head -n "$1" | tail -n 1
+ }
+ 
+ 
