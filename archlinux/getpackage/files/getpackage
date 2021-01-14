@@ -6,6 +6,7 @@
 
 fail=0
 maxfail=5
+echo "Searching for package $1 in repo $2"
 echo "Aborting after $maxfail tries"
 
 while read -r url; do
