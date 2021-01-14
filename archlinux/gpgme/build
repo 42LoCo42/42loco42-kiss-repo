@@ -1,2 +1,3 @@
-#!/bin/sh
-ls
+#!/bin/bash
+file="$(getpackage "gpgme")"
+zstd -dc "$file" | tar t -C "$1"

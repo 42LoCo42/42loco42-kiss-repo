@@ -1,0 +1,5 @@
+bash
+wget
+artix-mirrorlist
+archlinux-mirrorlist
+zstd make

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+[ -z "$1" ] && exit 1
+while read -r url; do
+	[ -z "$url" ] && continue
+	grep -q "^#" <<< "$url" && continue
+	url="${url#Server = }"
+	url="$(sed "s|\$repo|system|g; s|\$arch|x86_64|g" <<< "$url")"
+	url="$url/"
+	wget -r -l1 -nd -A "$1-*.zst" "$url" >&2
+	file="$(
+		find . -mindepth 1 -maxdepth 1 -type f\
+		| grep -E "^\./$1-.*\.zst"
+	)"
+	# shellcheck disable=SC2181
+	[ "$?" == "0" ] && [ -r "$file" ] && \
+	success=1 && break
+done <<< "$(
+	cat "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist-arch"
+)"
+
+[ "$success" != "1" ] && {
+	echo "Failed to find package $1"
+	exit 1
+}
+
+echo "$file"
