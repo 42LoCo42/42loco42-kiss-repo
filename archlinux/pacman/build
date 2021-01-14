@@ -1,5 +1,5 @@
 #!/bin/sh -e
-patch -Np1 < ../extracolors.patch
+patch -Np1 < extracolors.patch
 ./configure \
 	--prefix=/usr \
 	--sysconfdir=/etc \
