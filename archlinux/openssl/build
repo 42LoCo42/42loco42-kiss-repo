@@ -1,0 +1,3 @@
+#!/bin/sh -e
+getpackage "openssl" "system"
+cp -r openssl/* "$1/"
