@@ -3,5 +3,6 @@
 kiss a \
 | grep "^$1 " \
 | while read -r _ file; do
-	kiss a "$1" "$file"
+	kiss a "$1" "$file" &
 done
+echo "Done."
