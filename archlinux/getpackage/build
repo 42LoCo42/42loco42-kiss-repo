@@ -1,2 +1,3 @@
 #!/bin/sh -e
 install -Dm755 "getpackage" "$1/usr/bin/getpackage"
+kiss a wget /usr/bin/wget || true # busybox wget can't handle this
