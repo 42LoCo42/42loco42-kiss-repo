@@ -23,4 +23,7 @@ done <<< "$(
 	exit 1
 }
 
-echo "$file"
+mkdir "$1"
+zstd -dc "$file" | tar x -C "$1"
+rm "$file"
+rm "$1/.PKGINFO" "$1/.MTREE" "$1/.BUILDINFO"
