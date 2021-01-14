@@ -1,5 +1,6 @@
 bash
 wget
+zstd
 artix-mirrorlist
 archlinux-mirrorlist
-zstd make
+pkgconf make
