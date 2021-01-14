@@ -1,4 +1,0 @@
-#!/bin/sh -e
-mkdir -p "$1/etc/pacman.d"
-install -m644 "mirrorlist" "$1/etc/pacman.d/"
-echo "Remember to enable mirrors in /etc/pacman.d/mirrorlist!"

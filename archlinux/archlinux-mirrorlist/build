@@ -1,0 +1,6 @@
+#!/bin/sh -e
+mkdir -p "$1/etc/pacman.d"
+curl -o \
+	"$1/etc/pacman.d/mirrorlist-arch" \
+	"https://www.archlinux.org/mirrorlist/all/"
+echo "Remember to enable mirrors in /etc/pacman.d/mirrorlist-arch!"

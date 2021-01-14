@@ -3,5 +3,7 @@ glibc
 libarchive
 curl
 gpgme
-pacman-mirrorlist
+artix-mirrorlist
+artix-keyring
+archlinux-mirrorlist
 archlinux-keyring

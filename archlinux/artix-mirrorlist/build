@@ -1,0 +1,5 @@
+#!/bin/sh -e
+mkdir -p "$1/etc/pacman.d"
+curl \
+	"https://gitea.artixlinux.org/artixlinux/packages/raw/branch/master/artix-mirrorlist/x86_64/core/mirrorlist" \
+	-fLo "$1/etc/pacman.d/mirrorlist"
