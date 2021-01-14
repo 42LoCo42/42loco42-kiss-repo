@@ -3,6 +3,7 @@ glibc
 libarchive
 curl
 gpgme
+openssl
 artix-mirrorlist
 artix-keyring
 archlinux-mirrorlist
