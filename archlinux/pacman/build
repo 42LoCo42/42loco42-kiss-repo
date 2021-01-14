@@ -1,4 +1,14 @@
 #!/bin/sh -e
-getpackage "pacman" "system"
-cp -r pacman/* "$1/"
-kiss-aa "openssl"
+patch -Np1 < ../extracolors.patch
+./configure \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--localstatedir=/var \
+	--disable-doc \
+	--with-scriptlet-shell=/usr/bin/bash \
+	--with-ldconfig=/usr/bin/ldconfig
+make V=1
+make DESTDIR="$1" install
+install -dm755 "$1/etc"
+install -m644 "pacman.conf" "$1/etc"
+install -m644 "makepkg.conf" "$1/etc"
