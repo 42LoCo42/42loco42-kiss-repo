@@ -1,0 +1,2 @@
+#!/bin/sh -e
+install -Dm755 kiss-aa "$1/usr/bin/kiss-aa"
