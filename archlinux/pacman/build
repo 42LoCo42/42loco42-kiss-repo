@@ -1,5 +1,6 @@
 #!/bin/sh -e
-mkdir -p "$1/usr" "$1/etc" "$1/var/lib/pacman"
-cp -r "bin/" "lib/" "share/" "$1/usr/"
-cp -r "makepkg.conf" "pacman.conf" "include/" "$1/etc/"
-cp -r "cache/" "$1/var"
+getpackage "pacman"
+# mkdir -p "$1/usr" "$1/etc" "$1/var/lib/pacman"
+# cp -r "bin/" "lib/" "share/" "$1/usr/"
+# cp -r "makepkg.conf" "pacman.conf" "include/" "$1/etc/"
+# cp -r "cache/" "$1/var"

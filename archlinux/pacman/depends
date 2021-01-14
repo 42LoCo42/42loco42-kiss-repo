@@ -7,3 +7,4 @@ artix-mirrorlist
 artix-keyring
 archlinux-mirrorlist
 archlinux-keyring
+getpackage make
