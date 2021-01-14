@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
-[ -z "$1" ] && exit 1
+(( $# < 2 )) && {
+	echo "Usage: $0 <package> <repo>"
+	exit 1
+}
+
+fail=0
+maxfail=5
+echo "Aborting after $maxfail tries"
+
 while read -r url; do
 	[ -z "$url" ] && continue
 	grep -q "^#" <<< "$url" && continue
 	url="${url#Server = }"
-	url="$(sed "s|\$repo|system|g; s|\$arch|x86_64|g" <<< "$url")"
+	url="$(sed "s|\$repo|$2|g; s|\$arch|x86_64|g" <<< "$url")"
 	url="$url/"
-	wget -r -l1 -nd -A "$1-*.zst" "$url" >&2
+	echo "Trying $url"
+	wget -q -r -l1 -nd -A "$1-*.zst" "$url"
 	file="$(
 		find . -mindepth 1 -maxdepth 1 -type f\
 		| grep -E "^\./$1-.*\.zst"
@@ -14,6 +23,8 @@ while read -r url; do
 	# shellcheck disable=SC2181
 	[ "$?" == "0" ] && [ -r "$file" ] && \
 	success=1 && break
+	fail="$((fail + 1))"
+	((fail >= maxfail)) && break
 done <<< "$(
 	cat "/etc/pacman.d/mirrorlist" "/etc/pacman.d/mirrorlist-arch"
 )"
@@ -23,7 +34,9 @@ done <<< "$(
 	exit 1
 }
 
+echo "Success, now extracting & cleaning package"
 mkdir "$1"
-zstd -dc "$file" | tar x -C "$1"
+zstd -qdc "$file" | tar x -C "$1"
 rm "$file"
 rm "$1/.PKGINFO" "$1/.MTREE" "$1/.BUILDINFO"
+echo "Finished"

@@ -1,5 +1,5 @@
 #!/bin/sh -e
-getpackage "pacman"
+getpackage "pacman" "system"
 # mkdir -p "$1/usr" "$1/etc" "$1/var/lib/pacman"
 # cp -r "bin/" "lib/" "share/" "$1/usr/"
 # cp -r "makepkg.conf" "pacman.conf" "include/" "$1/etc/"
