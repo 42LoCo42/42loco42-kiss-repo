@@ -1,2 +1,2 @@
 #!/bin/sh -e
-install -Dm755 "getpackage" "$1/usr/bin/"
+install -Dm755 "getpackage" "$1/usr/bin/getpackage"
