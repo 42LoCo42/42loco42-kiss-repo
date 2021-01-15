@@ -1,3 +1,4 @@
 #!/bin/sh -e
-ls
-# make PREFIX=/usr DESTDIR="$1" install
+gzip -dc < "e02ba93b-de3c-4faf-b827-c679969fb565" | tar x
+cd "artix-keyring-20201028"
+make PREFIX=/usr DESTDIR="$1" install
