@@ -1,0 +1,13 @@
+--- Makefile.orig	2021-01-15 08:54:41.344657768 +0100
++++ Makefile	2021-01-15 08:55:22.811778851 +0100
+@@ -4,7 +4,9 @@
+ 
+ install:
+ 	install -dm755 $(DESTDIR)$(PREFIX)/share/pacman/keyrings/
+-	install -m0644 artix{.gpg,-trusted,-revoked} $(DESTDIR)$(PREFIX)/share/pacman/keyrings/
++	install -m0644 artix.gpg     $(DESTDIR)$(PREFIX)/share/pacman/keyrings/
++	install -m0644 artix-trusted $(DESTDIR)$(PREFIX)/share/pacman/keyrings/
++	install -m0644 artix-revoked $(DESTDIR)$(PREFIX)/share/pacman/keyrings/
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(PREFIX)/share/pacman/keyrings/artix{.gpg,-trusted,-revoked}
