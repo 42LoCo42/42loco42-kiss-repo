@@ -1,4 +1,4 @@
 https://sources.archlinux.org/other/pacman/pacman-5.2.2.tar.gz
-https://gitea.artixlinux.org/artixlinux/packages/raw/branch/master/pacman/x86_64/core/extracolors.patch
 https://gitea.artixlinux.org/artixlinux/packages/raw/branch/master/pacman/x86_64/core/makepkg.conf
 https://gitea.artixlinux.org/artixlinux/packages/raw/branch/master/pacman/x86_64/core/pacman.conf
+files/extracolors.patch
